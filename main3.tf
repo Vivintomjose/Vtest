@@ -125,36 +125,3 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
     storage_account_uri = azurerm_storage_account.my_storage_account.primary_blob_endpoint
   }
 }
-Create a file named variables.tf and insert the following code:
-
-Terraform
-
-Copy
-variable "resource_group_location" {
-  type        = string
-  default     = "eastus"
-  description = "Location of the resource group."
-}
-
-variable "resource_group_name_prefix" {
-  type        = string
-  default     = "rg"
-  description = "Prefix of the resource group name that's combined with a random ID so name is unique in your Azure subscription."
-}
-Create a file named outputs.tf and insert the following code:
-
-Terraform
-
-Copy
-output "resource_group_name" {
-  value = azurerm_resource_group.rg.name
-}
-
-output "public_ip_address" {
-  value = azurerm_linux_virtual_machine.my_terraform_vm.public_ip_address
-}
-
-output "tls_private_key" {
-  value     = tls_private_key.example_ssh.private_key_pem
-  sensitive = true
-}
